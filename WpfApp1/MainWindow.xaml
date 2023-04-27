@@ -13,8 +13,8 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <webView2:WebView2 Grid.Column="0" x:Name="MyWebView" />
-        <RichTextBox Grid.Column="1">
-            
-        </RichTextBox>
+        <StackPanel Grid.Column="1">
+            <Button x:Name="ReadInputButton" Content="Read Input" Click="ReadInputButton_Click" />
+        </StackPanel>
     </Grid>
 </Window>

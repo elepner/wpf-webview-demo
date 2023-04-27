@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace WpfApp1;
 
@@ -21,7 +20,7 @@ public partial class MainWindow : Window
             <html>
 
             <body>
-              <h1>Hello, WebView2!</h1>
+              <button id="read-data">Read data</button>
               <div id="editor-container">
               </div>
             </body>
@@ -52,12 +51,28 @@ public partial class MainWindow : Window
                 placeholder: 'Compose an epic...',
                 theme: 'snow'  // or 'bubble'
               });
+              console.log(quill)
+              document.getElementById('read-data').onclick = () => {
+                document.body.append(getInputValue())
+              }
+
+              function getInputValue() {
+                return quill.root.innerHTML;
+              }
             </script>
 
             </html>
             """";
         
         MyWebView.CoreWebView2.NavigateToString(htmlContent);
+
+        
     }
 
+    private async void ReadInputButton_Click(object sender, RoutedEventArgs e)
+    {
+        string jsCode = "getInputValue();";
+        string inputValue = await MyWebView.CoreWebView2.ExecuteScriptAsync(jsCode);
+        MessageBox.Show("Input value: " + inputValue);
+    }
 }
